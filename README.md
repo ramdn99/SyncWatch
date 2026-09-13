@@ -2,9 +2,10 @@
 
 ![SyncWatch Banner](public/SyncWatch-banner.jpg)
 
-[![Platform](https://img.shields.io/badge/Platform-Windows%20(Portable%20%7C%20MSI)-blue)](https://github.com/zeroXmoRamadan/SyncWatch)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20(Portable%20%7C%20MSI)%20%7C%20Web-blue)](https://github.com/zeroXmoRamadan/SyncWatch)
 [![Electron](https://img.shields.io/badge/Electron-37-47848F?logo=electron&logoColor=white)](https://electronjs.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-4.19-blue?logo=express&logoColor=white)](https://expressjs.com/)
 [![WebTorrent](https://img.shields.io/badge/WebTorrent-1.9-red)](https://webtorrent.io/)
 [![FFmpeg](https://img.shields.io/badge/FFmpeg-Static-007808?logo=ffmpeg&logoColor=white)](https://ffmpeg.org/)
 [![PeerJS](https://img.shields.io/badge/PeerJS-WebRTC-orange)](https://peerjs.com/)
@@ -12,12 +13,12 @@
 
 ---
 
-> [!WARNING]
-> **Deprecation Notice: Web Browser Version**
+> [!NOTE]
+> **Deployment Notice: Native Desktop vs. Web Browser Version**
 > 
-> The browser-only web version of SyncWatch is officially deprecated and unsupported. Standard web browsers cannot natively decode non-web formats (such as MKV containers, AC-3 / E-AC-3 / DTS audio, and HEVC video) and lack local transcode toolchain access.
+> The native Windows desktop application (Portable `.exe` and `.msi` installer) is the primary, actively maintained version of SyncWatch, featuring embedded hardware-assisted FFmpeg transcoding (for MKV containers, AC-3 / DTS audio, and HEVC video) and integrated WebTorrent downloads.
 > 
-> SyncWatch is now exclusively maintained and distributed as a native desktop application, integrating an embedded local streaming engine, hardware-assisted FFmpeg pipelines, and WebTorrent directly.
+> The web browser version is limited compared to the native desktop application and is not actively updated like the app version. While it can still be run locally using Node.js (`npm start` serving `http://localhost:4173`), playback in standard web browsers is constrained by native browser codec limitations and lacks local desktop transcode capabilities.
 
 ---
 
@@ -66,14 +67,34 @@ Whether streaming a BitTorrent magnet link during download or synchronizing a sh
 
 ## Installation & Deployment
 
-### Portable Executable
-1. Download `SyncWatch.exe` from the latest release or from `SyncWatch App/`.
+### Method 1: Portable Desktop Executable (Recommended)
+1. Download `SyncWatch.exe` from the latest release.
 2. Launch `SyncWatch.exe`. The application operates portably; downloads are maintained in the adjacent `SyncWatch Downloads/` directory.
 
-### Windows Installer (MSI)
-1. Download `SyncWatch-Setup.msi` from the releases page or from `SyncWatch App/`.
+### Method 2: Windows Installer (MSI)
+1. Download `SyncWatch-Setup.msi` from the releases page.
 2. Execute the installer and follow the setup wizard.
 3. Launch SyncWatch via the Start Menu or Desktop shortcut.
+
+### Method 3: Web Browser Version (Running via Node.js)
+
+> [!WARNING]
+> Web browser playback is limited to native browser codecs (such as H.264/AAC MP4 or VP8/WebM). Advanced features such as on-the-fly container remuxing, AC-3 / DTS audio transcoding, and system-level desktop optimizations are exclusive to the desktop application.
+
+To run the server and access SyncWatch directly from a web browser:
+1. Ensure [Node.js](https://nodejs.org/) (version 18 or higher) and npm are installed.
+2. Clone the repository and install dependencies:
+   ```bash
+   git clone https://github.com/zeroXmoRamadan/SyncWatch.git
+   cd SyncWatch
+   npm install
+   ```
+3. Start the application server:
+   ```bash
+   npm start
+   ```
+4. Open `http://localhost:4173` in your web browser.
+5. Keep the terminal process running to maintain the local streaming server while watching.
 
 ---
 
@@ -118,6 +139,9 @@ npm install
 
 # Run the desktop application in development mode
 npm run desktop
+
+# Alternatively, run the web browser version
+npm start
 ```
 
 ### Build Commands
@@ -134,6 +158,18 @@ npm run package:all
 ```
 
 Compiled deliverables are located in `../SyncWatch App/`.
+
+---
+
+## API Endpoints
+
+The embedded Express backend provides the following HTTP endpoints during both desktop and web execution:
+
+| Endpoint | Method | Description |
+| :--- | :--- | :--- |
+| `/api/torrent` | `POST` | Swaps or loads an active torrent session using a Magnet URI. |
+| `/api/torrent/status` | `GET` | Returns real-time download progress, active peer count, transfer speeds, and seeding status. |
+| `/stream` | `GET` | Streams media chunks from the active WebTorrent session or local disk via HTTP 206 Range requests. |
 
 ---
 
