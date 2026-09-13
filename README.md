@@ -2,7 +2,7 @@
 
 ![SyncWatch Banner](public/SyncWatch-banner.jpg)
 
-[![Platform](https://img.shields.io/badge/Platform-Windows%20(Portable%20%7C%20MSI)%20%7C%20Web-blue)](https://github.com/zeroXmoRamadan/SyncWatch)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20(Portable%20%7C%20MSI)%20%7C%20Web-blue)](https://github.com/ramdn99/SyncWatch)
 [![Electron](https://img.shields.io/badge/Electron-37-47848F?logo=electron&logoColor=white)](https://electronjs.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-4.19-blue?logo=express&logoColor=white)](https://expressjs.com/)
@@ -85,7 +85,7 @@ To run the server and access SyncWatch directly from a web browser:
 1. Ensure [Node.js](https://nodejs.org/) (version 18 or higher) and npm are installed.
 2. Clone the repository and install dependencies:
    ```bash
-   git clone https://github.com/zeroXmoRamadan/SyncWatch.git
+   git clone https://github.com/ramdn99/SyncWatch.git
    cd SyncWatch
    npm install
    ```
@@ -131,7 +131,7 @@ For participants possessing identical local video copies:
 
 ```bash
 # Clone the repository
-git clone https://github.com/zeroXmoRamadan/SyncWatch.git
+git clone https://github.com/ramdn99/SyncWatch.git
 cd SyncWatch
 
 # Install dependencies
@@ -221,4 +221,4 @@ This project is licensed under the **MIT License**. Refer to the [LICENSE](LICEN
 
 ---
 
-**Author:** Mohamed Ramadan
+**Author:** [Mohamed Ramadan](https://github.com/ramdn99) (@ramdn99)
